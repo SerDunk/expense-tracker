@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+    <title>ExpTrack</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="platform">
+            <h2 class="header">Expenses</h2>
+            
+            <div class="pop-hidden">
+                <form action="">
+                    <input type="text" placeholder="Description" class="name" required>
+                    <input type="number" placeholder="Price" max="8" class="number" required>
+                    <button type="button" class="subBtn">Submit</button>
+                </form>
+            </div>
+            
+            <div class="list"></div>
+            <button class="addBtn">Add</button>
+            <div class="total-display"></div>
+        </div>
+    </div>
+</body>
+</html>
