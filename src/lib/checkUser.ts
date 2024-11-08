@@ -4,24 +4,36 @@ import { db } from "./db";
 export default async function checkUser() {
   const user = await currentUser();
 
-  //Check for current logged in clerk user
+  // Check for current logged in Clerk user
   if (!user) {
     return null;
   }
 
-  //Check if the user is already in the database
+  // Check if the user already exists in the database by Clerk user ID
   const loggedInUser = await db.user.findUnique({
     where: {
       clerkUserId: user.id,
     },
   });
 
-  //If in database, return user
+  // If the user exists, return the user
   if (loggedInUser) {
     return loggedInUser;
   }
 
-  //If not in database , create new user
+  // If the user doesn't exist, check if the email is already in the database
+  const existingUserByEmail = await db.user.findUnique({
+    where: {
+      email: user.emailAddresses[0].emailAddress,
+    },
+  });
+
+  // If a user with the same email exists, return that user
+  if (existingUserByEmail) {
+    return existingUserByEmail;
+  }
+
+  // If the email doesn't exist, create a new user
   const newUser = await db.user.create({
     data: {
       clerkUserId: user.id,
