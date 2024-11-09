@@ -30,6 +30,7 @@ export default async function addTransaction(
   //Get logged in userId
 
   const { userId } = await auth();
+  console.log(userId);
 
   //Check for user
   if (!userId) {
